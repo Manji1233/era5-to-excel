@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ERA5 转 Excel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <div class="hero-mark">ERA5</div>
+      <div><p class="eyebrow">DATA CONVERTER</p><h1>上传 ERA5（.nc）数据</h1><p class="subtitle">上传后整理为 Excel，自动新增北京时间列，不转换原始单位。</p></div>
+    </section>
+    <section class="workspace">
+      <div class="drop-card" id="dropZone" tabindex="0" role="button" aria-label="选择 ERA5 NetCDF 文件或压缩包">
+        <div class="drop-orbit orbit-a"></div><div class="drop-orbit orbit-b"></div>
+        <div class="upload-icon" aria-hidden="true">↑</div><h2>拖拽 .nc 文件或压缩包到这里</h2><p>支持 .zip、.tar.gz，压缩包内可包含多个 .nc</p>
+        <input id="fileInput" type="file" accept=".nc,.zip,.tar,.tar.gz,.tgz,application/x-netcdf,application/zip,application/gzip" multiple hidden>
+        <button class="choose-btn" id="chooseBtn" type="button">选择文件</button>
+        <div class="hint"><span>⌁</span> 文件只在转换时上传，页面不会修改你的原始文件</div>
+      </div>
+      <div class="queue-card">
+        <div class="queue-head"><div><p class="eyebrow">FILE QUEUE</p><h2>待转换文件 <span id="fileCount">0</span></h2></div><button class="ghost-btn" id="clearBtn" type="button" disabled>清空列表</button></div>
+        <div id="fileList" class="file-list"><div class="empty-state" id="emptyState"><div class="empty-icon">＋</div><p>还没有文件</p><span>添加文件后会显示在这里</span></div></div>
+        <div class="queue-foot"><div class="status-note"><span class="status-dot"></span><span id="statusText">等待上传</span></div><button class="download-all" id="downloadAll" type="button" disabled>全部下载为 Excel <span>↓</span></button></div>
+      </div>
+    </section>
+    <p class="footnote">时间转换：UTC + 8 小时 · 原始变量与单位保持不变 · 处理在本机服务器完成</p>
+  </main>
+  <div id="toast" class="toast" role="status"></div>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

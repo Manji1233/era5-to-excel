@@ -1,0 +1,8 @@
+__pycache__/
+*.py[cod]
+.venv/
+*.xlsx
+*.docx
+*.nc
+ERA5转Excel_校验打包/
+.env
