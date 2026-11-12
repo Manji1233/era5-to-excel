@@ -1,0 +1,18 @@
+[Unit]
+Description=ERA5 NetCDF to Excel web application
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/era5-to-excel
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/opt/era5-to-excel/.venv/bin/gunicorn --workers 2 --threads 4 --timeout 600 --bind 127.0.0.1:5055 app:app
+Restart=on-failure
+RestartSec=5
+PrivateTmp=true
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target
